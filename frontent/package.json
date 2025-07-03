@@ -1,0 +1,29 @@
+{
+  "name": "translatemate",
+  "version": "1.0.0",
+  "source": "src/index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build --dist-dir '../backend/public' index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.4",
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.15.4",
+    "parcel-bundler": "^1.12.5",
+    "path-browserify": "^1.0.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "util": "^0.12.5"
+  },
+  "dependencies": {
+    "@alpinejs/persist": "^3.14.9",
+    "alpinejs": "^3.14.9",
+    "bulma": "^1.0.4",
+    "feather-icons": "^4.29.2"
+  }
+}

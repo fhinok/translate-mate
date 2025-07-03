@@ -1,0 +1,108 @@
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="./src/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./src/styles.scss">
+
+    <title>Translate Mate</title>
+</head >
+<body>
+    <section x-data class="section pb-0 pt-4">
+        <div class="columns is-mobile" x-data="{show: false}">
+            <div class="column is-three-quarters">
+                <h1 class="title is-1">Translate Mate</h1>
+                <h2 class="subtitle is-5">Multi-language translation tool<span x-show="show">, refreshing and empowering like a cold Mate.</span>
+                </h2>
+            </div>
+            <div class="column is-one-quarter has-text-right">
+                <img src="./src/mate2.png" alt="Translate Mate Logo" width="64" @click="show = !show" 
+                    style="cursor: pointer;">
+            </div>
+        </div>
+        
+        <p>Remaining characters: 
+            <span x-text="$store.data.usage.count"></span>/<span x-text="$store.data.usage.limit"></span>
+        </p>
+        <progress class="progress" 
+            :class="($store.data.usage.count > $store.data.usage.limit * 0.8) ? 'is-danger' : ''" 
+            :value="$store.data.usage.count" 
+            :max="$store.data.usage.limit">
+        </progress>
+    </section>
+
+    <section x-data class="section pt-5">
+        <div class="columns">
+            <template x-for="(lang, index) in $store.data.getActiveLanguages()">
+                <div class="column">
+                    <div class="field is-grouped">
+                        <div class="select">
+                            <select name="" id="" @change="$store.data.setActiveLanguage(index, $event.target.value)">
+                                <template x-for="(option, optionIndex) in $store.data.availableLanguages">
+                                    <option 
+                                        :value="option.language"
+                                        x-text="option.name" 
+                                        :selected="lang === option.language"
+                                    ></option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <textarea 
+                                class="textarea" 
+                                placeholder="Enter text to translate"
+                                x-model="$store.data.getLanguageModel(lang).text"
+                                @input.debounce.500ms="$store.data.translateOthers(lang)"
+                                onfocus="this.select()"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="level is-mobile">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <div class="control">
+                                        <button class="button is-primary" 
+                                            :disabled="$store.data.getLanguageModel(lang).isLoading || !$store.data.getLanguageModel(lang).text"
+                                            @click="$store.data.toClipboard($store.data.getLanguageModel(lang))"
+                                            >
+                                            <i data-feather="copy"></i>
+                                        </button>
+                                        <template x-if="$store.data.getLanguageModel(lang).isLoading">
+                                            <button class="button is-loading is-static">L</button>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <div class="buttons is-right">
+                                        <a class="button is-link is-outlined"
+                                            :href="'https://www.google.com/search?q='+$store.data.getLanguageModel(lang).text+'&hl='+lang"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            :disabled="$store.data.getLanguageModel(lang).isLoading || !$store.data.getLanguageModel(lang).text">
+                                            <i data-feather="search"></i>
+                                        </a>
+                                        <button class="button is-danger is-outlined" 
+                                            @click="$store.data.clear(lang)"
+                                            :disabled="$store.data.getLanguageModel(lang).isLoading || !$store.data.getLanguageModel(lang).text"
+                                            title="Clear text">
+                                            <i data-feather="x"></i>
+                                        </button>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    <script type="module" src="src/index.js"></script>
+</body>
+</html>

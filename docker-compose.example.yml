@@ -1,0 +1,11 @@
+services:
+  translatemate:
+    image: translatemate:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=production
+      - API_KEY=

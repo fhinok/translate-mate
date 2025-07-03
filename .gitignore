@@ -1,0 +1,11 @@
+docker-compose.yml
+**/.env
+# Ignore node_modules
+node_modules/
+# Ignore build directories
+frontent/dist/
+backend/public/
+
+.parcel-cache/
+**/images/
+pushToProd.sh
