@@ -1,4 +1,4 @@
-![Translate Mate Logo](https://raw.githubusercontent.com/yourusername/translatemate/frontend/src/logo.png)
+![Translate Mate Logo](https://github.com/fhinok/translatemate/blob/0d5fd80ddd7ec92f41fac502665902e70ea884f1/frontent/src/logo.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -57,8 +57,9 @@ docker compose up -d
 ```
 
 ## Screenshots
-![Screenshot 1](https://raw.githubusercontent.com/yourusername/translatemate/main/screenshot1.png)
-![Screenshot 2](https://raw.githubusercontent.com/yourusername/translatemate/main/screenshot2.png)
+
+![Screenshot 1](https://github.com/fhinok/translatemate/blob/0d5fd80ddd7ec92f41fac502665902e70ea884f1/screenshot1.jpg)
+![Screenshot 2](https://github.com/fhinok/translatemate/blob/0d5fd80ddd7ec92f41fac502665902e70ea884f1/screenshot2.jpg)
 
 ## Future Plans
 - Implement user authentication to save translation history.
