@@ -68,8 +68,7 @@ async function translateText(text, targetLang, sourceLang = null) {
         const response = await deeplClient.translateText(text, sourceLang, targetLang, {
             preserveFormatting: true,
             tagHandling: 'html',
-            context: CONTEXT[targetLang] || CONTEXT['en'],
-            splitSentences: 'nonewlines'
+            context: CONTEXT[targetLang] || CONTEXT['en']
         });
         return response.text;
     } catch (error) {
