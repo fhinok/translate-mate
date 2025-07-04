@@ -1,8 +1,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 
+
 # Translate Mate
-<img align="right" width="auto" height="120" src="https://github.com/fhinok/translatemate/blob/5fd693be89337b90e094e4af85c5cdaa0642fb19/frontent/src/logo.png">
+<img align="right" width="70" src="https://github.com/fhinok/translatemate/blob/5fd693be89337b90e094e4af85c5cdaa0642fb19/frontent/src/logo.png">
 
 **Multi-language translation tool**
 
