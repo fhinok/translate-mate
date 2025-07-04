@@ -110,24 +110,24 @@
         </div>
     </section>
 
-    <section x-data class="section pt-5">
+    <div x-data>
         <div class="modal" :class="{ 'is-active': $store.dialog.showDialog }">
-                <div class="modal-background"></div>
-                <div class="modal-card p-5" @click.away="$store.dialog.showDialog = false">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title" x-text="$store.dialog.title">Bestätigen</p>
-                    </header>
-                    <div class="modal-card-body">
-                        <p x-html="$store.dialog.message"></p>
-                    </div>
-                    <footer class="modal-card-foot is-justify-content-flex-end">
-                        <div class="buttons">
-                            <button id="dialog-confirm" class="button is-success" x-text="$store.dialog.buttonOK"></button>
-                        </div>
-                    </footer>
+            <div class="modal-background"></div>
+            <div class="modal-card p-5" @click.away="$store.dialog.showDialog = false">
+                <header class="modal-card-head">
+                    <p class="modal-card-title" x-text="$store.dialog.title">Bestätigen</p>
+                </header>
+                <div class="modal-card-body">
+                    <p x-html="$store.dialog.message"></p>
                 </div>
+                <footer class="modal-card-foot is-justify-content-flex-end">
+                    <div class="buttons">
+                        <button id="dialog-confirm" class="button is-success" x-text="$store.dialog.buttonOK"></button>
+                    </div>
+                </footer>
             </div>
-    </section>
+        </div>
+    </div>
 
     <script type="module" src="src/index.js"></script>
 </body>
