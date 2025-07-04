@@ -69,9 +69,11 @@ docker compose up -d --build
 ```
 
 ## Screenshots
-
-![Screenshot 1](https://github.com/fhinok/translatemate/blob/0d5fd80ddd7ec92f41fac502665902e70ea884f1/screenshot1.jpg)
-![Screenshot 2](https://github.com/fhinok/translatemate/blob/0d5fd80ddd7ec92f41fac502665902e70ea884f1/screenshot2.jpg)
+<img src="screenshot1.jpg">
+<p>
+  <img width="300" src="screenshot2.jpg">
+  <img width="300" src="screenshot3.jpg">  
+</p>
 
 ## Future Plans
 - Environment Variables for URL
