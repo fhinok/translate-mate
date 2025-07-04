@@ -3,11 +3,12 @@
 
 
 # Translate Mate
-<img align="right" width="70" src="https://github.com/fhinok/translatemate/blob/5fd693be89337b90e094e4af85c5cdaa0642fb19/frontent/src/logo.png">
+<img align="right" width="80" src="https://github.com/fhinok/translatemate/blob/5fd693be89337b90e094e4af85c5cdaa0642fb19/frontent/src/logo.png">
 
 **Multi-language translation tool**
 
 Makes translating from and to multiple languages simultaneously refreshing and empowering like an coffein-loaded ice cold mate tea.
+
 Built for manually translating lots of product attributes to different languages, with a focus on usability.
 
 ## Features
