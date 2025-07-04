@@ -80,11 +80,18 @@
                             <div class="level-right">
                                 <div class="level-item">
                                     <div class="buttons is-right">
+                                        <button class="button is-success is-outlined" 
+                                            @click="$store.data.dictionaryLookup($store.data.getLanguageModel(lang).text, lang)"
+                                            :disabled="$store.data.getLanguageModel(lang).isLoading || !$store.data.getLanguageModel(lang).text || $store.data.getLanguageModel(lang).text.split(' ').length > 6"
+                                            title="dictionary lookup">
+                                            <i data-feather="book"></i>
+                                        </button>
                                         <a class="button is-link is-outlined"
                                             :href="'https://www.google.com/search?q='+$store.data.getLanguageModel(lang).text+'&hl='+lang"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            :disabled="$store.data.getLanguageModel(lang).isLoading || !$store.data.getLanguageModel(lang).text">
+                                            :disabled="$store.data.getLanguageModel(lang).isLoading || !$store.data.getLanguageModel(lang).text"
+                                            title="Search on Google">
                                             <i data-feather="search"></i>
                                         </a>
                                         <button class="button is-danger is-outlined" 
@@ -101,6 +108,25 @@
                 </div>
             </template>
         </div>
+    </section>
+
+    <section x-data class="section pt-5">
+        <div class="modal" :class="{ 'is-active': $store.dialog.showDialog }">
+                <div class="modal-background"></div>
+                <div class="modal-card p-5" @click.away="$store.dialog.showDialog = false">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title" x-text="$store.dialog.title">Bestätigen</p>
+                    </header>
+                    <div class="modal-card-body">
+                        <p x-html="$store.dialog.message"></p>
+                    </div>
+                    <footer class="modal-card-foot is-justify-content-flex-end">
+                        <div class="buttons">
+                            <button id="dialog-confirm" class="button is-success" x-text="$store.dialog.buttonOK"></button>
+                        </div>
+                    </footer>
+                </div>
+            </div>
     </section>
 
     <script type="module" src="src/index.js"></script>

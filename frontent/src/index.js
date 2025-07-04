@@ -1,5 +1,6 @@
 import Alpine from "alpinejs";
 import persist from "@alpinejs/persist";
+import dialog from "./dialog";
 const feather = require("feather-icons");
 
 window.Alpine = Alpine;
@@ -9,7 +10,7 @@ Alpine.plugin(persist);
 const URL = "";
 
 document.addEventListener('alpine:init', () => {
-
+    Alpine.store("dialog", dialog);
     Alpine.store("data", {
     availableLanguages: Alpine.$persist([]),
     selectedLanguages: ['de', 'en-GB', 'fr', 'it'], // Default languages
@@ -130,6 +131,53 @@ document.addEventListener('alpine:init', () => {
                 console.error('Error fetching usage:', error);
                 return 'Error fetching usage';
             });
+    },
+
+    dictionaryLookup(text, lang = 'en', retake = false) {
+        if (!text || text.split(' ').length > 6) {
+            console.warn('Dictionary lookup skipped: text is empty or too long');
+            return;
+        }
+        if(lang.split('-').length > 1) {
+            lang = lang.split('-')[0]; // Use only the first part of the language code
+        }
+        fetch(`https://freedictionaryapi.com/api/v1/entries/${lang}/${text}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        }).then(data => {
+            if(data.entries.length === 0 && !retake) {
+                this.dictionaryLookup(text.charAt(0).toUpperCase() + text.slice(1), lang, true);
+                return;
+            }
+            Alpine.store("dialog").show(`Bedeutung von ${text} (${lang})`, this.formatDictionaryData(data))
+        })
+    },
+
+    formatDictionaryData(data) {
+        if (!data || !data.entries || data.entries.length === 0) {
+            return 'No definitions found.';
+        }
+        const source = `<a href="${data.source.url}">Quelle</a><br /><br />`;
+        const definitions = "<h5 class='title is-5'>Definitionen</h5>"+data.entries.map(entry => {
+            const definitions = entry.senses.flatMap(sense => sense.definition);
+            return `<strong>${entry.partOfSpeech}</strong>: ${definitions.join(', ')}`;
+        }).join('<br>');
+
+        const synonyms = data.entries.flatMap(entry => entry.senses.flatMap(sense => sense.synonyms));
+        const synonymsText = "<h5 class='title is-5 mt-3'>Synonyme</h5>"+synonyms.join(', ');
+
+        if (synonyms.length === 0) {
+            return source + definitions || 'Keine Definitionen gefunden.';
+        }
+
+        return source + definitions + synonyms || 'Keine Definitionen gefunden.';
     },
 
     toClipboard(model) {
