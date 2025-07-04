@@ -33,9 +33,9 @@
     </section>
 
     <section x-data class="section pt-5">
-        <div class="columns">
+        <div class="columns is-multiline">
             <template x-for="(lang, index) in $store.data.getActiveLanguages()">
-                <div class="column">
+                <div class="column is-one-third-tablet">
                     <div class="field is-grouped">
                         <div class="select">
                             <select name="" id="" @change="$store.data.setActiveLanguage(index, $event.target.value)">
